@@ -25,10 +25,12 @@
                     <div class="card-body text-center">
                         <div class="d-flex justify-content-center">
                             <div class="col-md-6">
-                                <div class="input-container">
-                                    <label for="" class="text-center title">Card Number</label>
-                                    <input id="inscardnumber" type="text" maxlength="19" placeholder="xxxxxxxxxx" />
-                                </div>
+
+                                    <div class="input-container">
+                                        <label for="phone" class="text-center title">Phone Number<span class="cancel_status"></sapn> </label>
+                                        <input type="text" name="phone" id="phone"  class="phone" value="{{ old('phone') }}" placeholder="09xxxxxxxxx" />
+                                    </div>
+
                                 <p class="mt-1">You may receive SMS notification from us.</p>
                                 <button type="button" id="signin-btn" class="btn btn-primary btn-sm">Sign In</button>
                             </div>
@@ -48,10 +50,32 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#signin-btn").click(function(){
-            const inscardnumber = $("#inscardnumber").val();
+            const phone = $("#phone").val();
 
-            {{-- console.log(inscardnumber); --}}
 
+            console.log(phone);
+            $.ajax({
+                url:"{{route('installercards.signin')}}",
+                method:"GET",
+                data:{"phone":phone},
+                success:function(response){
+                    console.log(response);
+
+                    if(response.installercard){
+
+                        window.location.href = "{{ route('otps.index') }}";
+                    }else{
+                        Swal.fire({
+                            title: response.title,
+                            text: response.message,
+                            icon: "error"
+                        });
+                    }
+                },
+                error:function(response){
+                    console.log(response);
+                }
+            });
         });
     });
 </script>
@@ -109,7 +133,7 @@
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
                                             Register
-                                        </a>
+                                    </a>
                                     @endif
                                 @endauth
                             </nav>

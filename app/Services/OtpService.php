@@ -16,27 +16,27 @@ class OtpService{
 
 
 
-        //   Otp::create([
-        //        "installer_card_card_number"=>$installer_card_card_number,
-        //        "otp"=>$randomotp,
-        //        'type'=> "signin",
-        //        "expires_at"=> $expireset
-        //   ]);
+          Otp::create([
+               "installer_card_card_number"=>$installer_card_card_number,
+               "otp"=>$randomotp,
+               'type'=> $type,
+               "expires_at"=> $expireset
+          ]);
 
-          // Send OTP via to email / sms
-        //   dispatch(new OtpMailJob($user_email,$randomotp));
 
           return $randomotp;
      }
-     public function verifyotp($userid,$otp){
-          $checkotp = Otp::where("user_id",$userid)
+     public function verifyotp($installer_card_card_number,$type,$otp){
+          $checkotp = Otp::where("installer_card_card_number",$installer_card_card_number)
                          ->where("otp",$otp)
-                         ->where("expires_at",">",\Carbon\Carbon::now())->first();
+                         ->where("expires_at",">",\Carbon\Carbon::now())
+                         ->where("type",$type)
+                         ->first();
 
           if($checkotp){
                // OTP valid
 
-               $checkotp->delete(); // Delete OTP after vefirication.
+               $checkotp->delete(); // Delete OTP after verification.
 
                return true;
           }else{
