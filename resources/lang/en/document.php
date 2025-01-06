@@ -1,0 +1,35 @@
+<?php
+
+return [
+    'create_document' => 'Create Document',
+    'edit_document' => 'Edit Document',
+    'branch'      => 'Branch',
+    'document_no'     => 'Document No',
+    'document_type'     => 'Document Type',
+    'document_date'     => 'Document Date',
+    'supplier'    => 'Supplier',
+    'remark_type'    => 'Remark Type',
+    'category'   => 'Category',
+    'delivery_date'   => 'Delivery Date',
+    'attach'   => 'Attach File',
+    'only_one_file'   => 'Only one Attach File',
+    'remark'   => 'Remark',
+    'document_list' => 'Document List',
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+    'status' => 'Status',
+    'operation' => 'Operation',
+    'br_manager' => 'Br.Manager',
+    'cat_head' => 'Cat.Head',
+    'mer_manager' =>'Mer.Manager',
+    'rg_out' => 'RG Out',
+    'cn' => 'CN',
+    'rg_in' => 'RG In',
+    'db' => 'DB',
+    'action' => 'Action',
+    'my' => 'My',
+    'document_list' => 'Document List',
+    'my_document' => 'My Document',
+  
+];
+?>

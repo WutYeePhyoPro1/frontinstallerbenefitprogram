@@ -1,0 +1,75 @@
+<?php
+
+return [
+    'promotion_name' => 'Promotion Name',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'status' => 'Status',
+    'action' => 'Action',
+    'invoice_no' => 'Invoice No',
+
+    'ticket_history' => 'Ticket History',
+    'ticket_history_detail' => 'Ticket History Detail',
+    'ticket_detail' => 'Ticket Detail',
+
+    'customer_number' => 'Customer Number',
+    'customer_number_detail' => 'Customer Number Detail',
+    'customer_number_detail_graph' => 'Customer Number Detail Graph',
+
+    'coupon_number' => 'Coupon Number',
+    'coupon_number_detail' => 'Coupon Number Detail',
+    'coupon_number_detail_on_branch' => 'Coupon Number Detail on Branch',
+
+    'customer_number_compare' => 'Customer Number Compare',
+    'customer_status_number' => 'Customer Status Number',
+    'customer_number_detail_on_branch' => 'Customer Number Detail on Branch',
+    'customer_status_number_detail_graph' => 'Customer Status Number Detail Graph',
+
+    'compare_name' => 'Compare Name',
+    'promotion' => 'Promotions',
+
+    'ticket_no' => 'Ticket No',
+    'created_date' => 'Created Date',
+    'branch_name' => 'Branch Name',
+    'customer_name' => 'Customer Name',
+
+    'day' => 'Day',
+    'month' => 'Month',
+    'year' => 'Year',
+    'branch_code' => 'Branch Code',
+    'customer_phone_no' => 'Phone No',
+    'customer_nrc' => 'NRC',
+    'customer_type' => 'Customer Type',
+    'customer_email' => 'Email',
+    'customer_township' => 'Township',
+    'customer_region' => 'Region',
+    'print_by' => 'Print By',
+    'print_time' => 'Print Time',
+
+    'total' => 'Total',
+    'customer_count' => 'Customer Count',
+
+    'member_count' => 'Member Count',
+    'old_customer_count' => 'Old Customer Count',
+    'new_customer_count' => 'New Customer Count',
+    'created_at' => 'Created At',
+    'created_by' => 'Created By',
+    'amphurs' => 'Township',
+    'provinces' => 'Division',
+    'count' => 'Count',
+    'branch' => 'Branch',
+    'date' => 'Date',
+    'code' => 'Code',
+    'name' => 'Name',
+    'customer_code' => 'Customer Code',
+    'customer_name' => 'Customer Name',
+    'qty' => 'Qty',
+    'coupon_amount' => 'Coupon Amount',
+    'total_amount' => 'Total Amount',
+    'invoice_no' => 'Invoice No',
+    'promotion_date' => 'Promotion Date',
+    'promotion_name' => 'Promotion Name',
+    'prize_type' => 'Prize Type',
+    'cash_coupon_issed_report' => 'Cash_coupon_issued_report',
+   
+];

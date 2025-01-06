@@ -55,6 +55,9 @@ class OtpsController extends Controller
         $isvalidotp = $this->otpservice->verifyotp($installer_card_card_number,$type,$otp);
 
         if($isvalidotp){
+            // Mark this user as otp verified for a session
+            $request->session()->put('otp_verified', true);
+
             return response()->json(["message"=>"OTP is valid",'valid'=>"true"]);
         }else{
             return response()->json(["message"=>"OTP is Invalid"],400);

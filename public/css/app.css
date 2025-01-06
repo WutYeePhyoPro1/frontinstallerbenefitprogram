@@ -1,0 +1,370 @@
+body{
+    box-sizing: border-box;
+}
+.open {
+    margin-left: 40px;
+}
+
+.document_search {
+    width: 150px;
+    height: 50px;
+}
+
+.main_button {
+    margin-top: 40px;
+    width: 150px;
+    height: 50px;
+}
+
+.ex_to_rt_status {
+    color: blue;
+    font-weight: bold;
+}
+
+.normal_status {
+    color: #676e8a;
+    font-weight: bold;
+}
+
+.cancel_status {
+    color: red;
+    font-weight: bold;
+}
+
+.complete_status {
+    color: green;
+    font-weight: bold;
+}
+
+.exchange_deducted {
+    color: orange;
+    font-weight: bold;
+}
+
+#top-tab-list li {
+    width: 15% !important;
+}
+
+.back_to_select_box {
+    text-decoration: underline;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+
+.programbanner{
+    width: 100%;
+    height: 20vh;
+    background: radial-gradient(rgba(109,200,225),rgba(160,219,253));
+}
+
+/* Start Installer Menu */
+.dropdown-divider {
+    border-color: var(--primary); /* Change to your desired color */
+}
+/* End Installer Menu */
+
+/* Start Installer Card */
+    .installercards{
+        background: #414EEB;
+        color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+
+    }
+    .inactivecard{
+        background: rgba(230, 224, 234, 1);
+        color: inherit;
+    }
+
+    .custom-switch {
+        display: flex;
+        align-items: center; /* Vertically aligns the switch and text */
+    }
+
+    /* The checkbox input itself, hidden from view */
+    .custom-switch-input {
+        display: none; /* Hide the original checkbox */
+    }
+
+    /* The visual part of the switch */
+    .custom-switch-label {
+        position: relative;
+        width: 50px;
+        height: 24px;
+        background-color: #ccc; /* Light gray background */
+        border-radius: 24px; /* Make the background rounded */
+        cursor: pointer;
+        transition: background-color 0.4s ease; /* Smooth transition on toggle */
+    }
+
+    /* The circle (slider) that moves on the switch */
+    .custom-switch-label::before {
+        content: ""; /* Empty content to create the slider */
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white; /* White slider */
+        bottom: 2px;
+        left: 2px;
+        transition: transform 0.4s ease; /* Smooth sliding effect */
+    }
+
+    /* Change background and slider position when checked */
+    .custom-switch-input:checked + .custom-switch-label {
+        background-color: #4caf50; /* Background turns green when toggled on */
+    }
+
+    .custom-switch-input:checked + .custom-switch-label::before {
+        transform: translateX(26px); /* Move the slider to the right */
+    }
+
+    /* Optional label text next to the switch */
+    .switch-label {
+        margin-left: 10px; /* Space between switch and label */
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    .register-steps{
+        width: 30px;
+        height: 30px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        color: white;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .poscustomer{
+        position: relative;
+    }
+    .crownicon{
+        position: absolute;
+        left: 50%;
+        top: 0px;
+        transform: translateX(-50%);
+
+        display: none;
+    }
+    .poscustomer.member .crownicon{
+        display: block;
+    }
+/* End Installer Card */
+
+.pointrulepair{
+    border: 1px solid #414EEB;
+    border-radius: 10px;
+}
+
+/* Start  Installer Card Point Detail*/
+    .collectpointcard{
+        background: rgba(247, 230, 212, 1);
+        min-height: 60vh;
+    }
+
+    .earningpointlists{
+        height: 555px;
+        overflow-y: auto;
+    }
+
+    .earningpointlists li:hover{
+        cursor: pointer;
+        background-color: #eee;
+    }
+
+    .earningpointlists li.fullyredeemed
+    {
+        background-color: rgba(230, 224, 234, 1);
+    }
+
+
+    .redeemcashcards{
+        background: rgba(226, 238, 218, 1);
+        min-height: 60vh;
+    }
+
+    .returnproductscards{
+        background: rgba(230, 224, 234, 1);
+    }
+/* End Installer Card Point Detail */
+
+
+
+  .table-container{
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+.coupon-receive-footer td{
+    border: none;
+}
+
+.transactionfooters span{
+    color: #012970;
+    font-weight: 1000;
+    display: block;
+}
+.roles{
+    display: inline !important;
+}
+.logo-container{
+    position: relative;
+}
+.pro1logo{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.logo-container{
+    color: #012970 !important;
+}
+@media (max-width:768px) {
+    .pro1logo{
+        position: static;
+        margin-bottom: 20px;
+    }
+}
+
+.approvalnotibadges{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    min-width: 42px;
+    min-height: 20px;
+    background-color: red;
+    border-radius: 40px;
+    color: white;
+
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pointpromotioninfos{
+    background: rgba(247, 230, 212, 1);
+    border-radius: 20px 20px 0 0;
+    color: #444;
+    padding: 20px 10px;
+    margin-top: 0;
+}
+
+.security-areas{
+    background-image:url('../images/computer-security-system-concept-illustration_135170-40.avif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 100vh;
+}
+
+/* Start Collection Transaction */
+#return_parts {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    opacity: 0;
+}
+
+#return_parts.active {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.delete-btns{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+.returns:disabled {
+    background-color: var(--primary);
+}
+
+.readonly-select {
+    pointer-events: none;
+    /* appearance: none; */
+    background-color: #e9ecef; /* Make it look like a readonly input */
+}
+/* End Collection Transaction */
+
+/* Start Installer Card Point */
+.installercardpoint.redeemed{
+    background-color: rgba(230, 224, 234, 1);
+}
+/* End Installer Card Point */
+
+
+/* Start Installer Card Match */
+.phone-remove-btn{
+    width: 30px;
+    height: 30px;
+    background-color: var(--danger);
+    color: white;
+    border: none;
+
+    outline: none;
+}
+/* End Installer Card Match */
+
+/* Start Redemption Transaction */
+.gallery{
+    min-width: 200px;
+    height: auto;
+    background-color: #eee;
+    color: #aaa;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align: center;
+    padding: 10px;
+
+}
+.gallery img,.redemptiontransactionfiles img,.installercardfiles img{
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    object-fit: cover;
+
+    padding: 5px;
+    margin: 0 5px;
+}
+.removetxt span{
+    display: none;
+}
+
+
+/* End Redemption Transaction */
+
+/* Start FAQ */
+.card-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-header i {
+    transition: transform 0.3s ease;
+  }
+
+  .card-header.collapsed i {
+    transform: rotate(-90deg);
+  }
+/* End FAQ */

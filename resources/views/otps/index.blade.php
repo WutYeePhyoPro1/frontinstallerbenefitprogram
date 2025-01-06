@@ -137,8 +137,8 @@
              data:$(this).serialize(),
              success:function(response){
                 console.log(response);
-                if(response.message){
-                    window.location.href = "{{ route('welcome') }}";
+                if(response.message && response.valid == "true"){
+                    window.location.href = "{{ route('installercards.detail') }}";
                 }else{
                     Swal.fire({
                         title: "Invalid OTP",

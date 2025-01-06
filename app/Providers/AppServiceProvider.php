@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Http\Middleware\AuthOTPMid;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AutoLogoutMid;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::aliasMiddleware('auth.card', \App\Http\Middleware\AuthCardMid::class);
+        Route::aliasMiddleware('auth.otp', AuthOTPMid::class);
+        Route::aliasMiddleware('auth.autologout', AutoLogoutMid::class);
     }
 }

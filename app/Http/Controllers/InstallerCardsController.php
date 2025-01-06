@@ -64,4 +64,70 @@ class InstallerCardsController extends Controller
             return response()->json(["title"=>"Oops, Installer Card Not Found for this phone number","message"=>"Phone Number Incorrect!!"]);
         }
     }
+
+    public function detail(Request $request,){
+        $cardnumber = getAuthCard()->card_number;
+        $installercard = InstallerCard::where('card_number',$cardnumber)->first();
+        // dd($installercard);
+        $installercardcount = InstallerCard::where('gbh_customer_id',$installercard->gbh_customer_id)->where('card_number',"!=",$cardnumber)->count();
+        // dd($installercardcount);
+
+
+        $collectionSearch = $request->input('collection_search');
+        $redemptionSearch = $request->input('redemption_search');
+        $collectiontransactions = CollectionTransaction::where('installer_card_card_number',$cardnumber)
+                                    ->when($collectionSearch, function ($query, $collectionSearch) {
+                                        // $query->where('document_no', 'LIKE', "%$collectionSearch%");
+                                            // ->orWhere('amount', 'LIKE', "%$collectionSearch%");
+                                        $query->where('invoice_number', 'LIKE', "%$collectionSearch%")
+                                            ->orWhere('document_no', 'LIKE', "%$collectionSearch%");
+                                    })
+                                    ->orderBy("created_at",'desc')
+                                    ->orderBy('id','desc')
+                                    ->paginate(10, ['*'], 'collection_page');
+        // $redemptiontransactions = RedemptionTransaction::where('installer_card_card_number',$cardnumber)
+        //                             ->when($redemptionSearch, function ($query, $redemptionSearch) {
+        //                                 $query->where('document_no', 'LIKE', "%$redemptionSearch%");
+        //                                     // ->orWhere('transaction_id', 'LIKE', "%$redemptionSearch%")
+        //                             })
+        //                             ->orderBy("created_at",'desc')
+        //                             ->orderBy('id','desc')
+        //                             ->paginate(10, ['*'], 'redemption_page');
+
+
+        // $usedpoints = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_points_redeemed');
+        // $usedamount = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_cash_value');
+
+        $installercardpointquery = InstallerCardPoint::query()
+                                    ->where('installer_card_card_number',$cardnumber)
+                                    ->where('is_redeemed', false)
+                                    ->where('expiry_date', '<', Carbon::now());
+        $expiredpoints = $installercardpointquery->sum('points_balance');
+        $expiredamounts = $installercardpointquery->sum('amount_balance');
+
+        $expiringsoonpoints = InstallerCardPoint::where("installer_card_card_number", $installercard->card_number)
+                                ->where("is_redeemed", "0")
+                                ->where("expiry_date", "<=", Carbon::now()->endOfMonth())
+                                ->sum('points_balance');
+        // dd($expiringsoonpoints);
+        return view('installercards.detail',compact(
+            "installercard",
+            "installercardcount",
+            'collectiontransactions',
+            // 'redemptiontransactions',
+            // 'usedpoints',
+            // 'usedamount',
+            'expiredpoints',
+            'expiredamounts',
+            'expiringsoonpoints',
+            'collectionSearch',
+            'redemptionSearch'
+        ));
+    }
+
+    public function signout(Request $request){
+        Session::flush();
+
+        return redirect()->route('welcome')->with("message","You have been logged out.");
+    }
 }
