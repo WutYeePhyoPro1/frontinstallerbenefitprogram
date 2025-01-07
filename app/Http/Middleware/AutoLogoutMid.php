@@ -25,6 +25,9 @@ class AutoLogoutMid
             if(abs(now()->diffInSeconds($lastactivity)) >= $dueinactivetime){
                 Session::flush();
 
+                // Session::forget('installer_card_card_number');
+                // Session::forget('otp_verified');
+
                 return redirect()->route('welcome')->with("message","You have been logged out.");
             }
 

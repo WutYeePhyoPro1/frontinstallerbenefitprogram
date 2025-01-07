@@ -15,7 +15,8 @@ class AuthOTPMid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->session()->has('installer_card_card_number') && ($request->session()->has('otp_verified') && $request->session()->get('otp_verified') == true)) {
+        // dd($request->session()->get('installer_card_card_number'),$request->session()->get('otp_verified'));
+        if ($request->session()->has('installer_card_card_number') && ($request->session()->has('otp_verified') && $request->session()->get('otp_verified') == "true")) {
             return $next($request);
         }
         return redirect()->route('welcome');

@@ -17,6 +17,7 @@ class AuthCardMid
     {
         if ($request->session()->has('installer_card_card_number')) {
             // dd($request->session()->get('installer_card_card_number'));
+
             return $next($request);
         }
 

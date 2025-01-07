@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
 <div class="content-page">
@@ -129,31 +129,8 @@
                     @else
                         <button type="button" id="back-btn" class="btn btn-light mr-2" onclick="window.history.back();">Back</button>
                     @endif
-
-                {{-- @if($collectiontransaction->checkreturn()) --}}
-                    <button type="button" id="open_return_btn" class="btn btn-danger">Return Product</button>
-                {{-- @endif --}}
             </div>
-            <div class="col-lg-12 my-2 py-2" id="return_parts">
-                <form id="return-product-form" action="{{ route('collectiontransactions.returnproduct',$collectiontransaction->uuid)}} " method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" id="return_product_docno" name="return_product_docno" class="form-control" placeholder="Scan Return Document No" readonly/>
-                            </div>
 
-                            <!-- bootstrap loader -->
-                            <div class="d-flex justify-content-center mt-3">
-                                <div id="returnloader" class="spinner-border spinner-border-sm d-none" role="status"></div>
-                            </div>
-                        </div>
-                        {{-- <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Deduct Points</button>
-                        </div> --}}
-                    </div>
-                </form>
-            </div>
 
             @if(count($returnbanners) > 0)
             <div class="col-lg-12 mb-4 pb-4">

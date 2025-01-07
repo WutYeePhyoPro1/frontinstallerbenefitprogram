@@ -7,23 +7,28 @@
             <div class="col-lg-12">
                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                     <div>
-                        <h4 class="mb-3">Collection Transaction Lists</h4>
+                        <h4 class="mb-3">Redemption Transaction Lists</h4>
                     </div>
                 </div>
             </div>
-            {{-- {{ dd(request()->query() ) }} --}}
             <div class="col-lg-12 mb-2">
-                <form action="{{ route('collectiontransactions.search') }}" method="GET">
+                <form action="{{ route('redemptiontransactions.search') }}" method="GET">
                     <div class="row justify-content-end align-items-end">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <input type="text" id="" class="form-control form-control-sm" name="docno" placeholder="Enter Document No" value="{{ request()->get('docno') }}"/>
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" id="" class="form-control form-control-sm" name="invoice_number" placeholder="Enter Invoice Number" value="{{ request()->get('invoice_number') }}"/>
+                                <select name="status" id="status" class="status form-control form-control-sm">
+                                    <option value="">Choose Status</option>
+                                    <option value="pending" {{ request()->get('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="approved" {{ request()->get('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                                    <option value="rejected" {{ request()->get('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <option value="paid" {{ request()->get('status') == 'paid' ? 'selected' : '' }}>Paid</option>
+                                    <option value="finished" {{ request()->get('status') == 'finished' ? 'selected' : '' }}>Finished</option>
+                                </select>
                             </div>
                         </div>
 
@@ -65,46 +70,44 @@
 
             <div class="col-lg-12">
                 <div class="rounded mb-3 table-container">
-                    <table class="table table-warning table-hover mb-0 tbl-server-info" id="lucky_draw_list">
+                    <table class="table table-success table-hover mb-0 tbl-server-info" id="lucky_draw_list">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>No</th>
                                 <th>Document No.</th>
                                 <th>Branch</th>
                                 <th>Card Number</th>
-                                <th>Invoice Number</th>
-                                <th>Total Points Collected</th>
-                                <th>Total Save Value</th>
-                                <th>Collection Date</th>
-                                <th>Action</th>
+                                <th>Total Points Redeemed</th>
+                                <th>Total Cash Value</th>
+                                <th>Status</th>
+                                <th>Requester</th>
+                                <th>Prepare By</th>
+                                {{-- <th>Approved By</th> --}}
+                                {{-- <th>Redemption Date</th> --}}
                             </tr>
                         </thead>
                         <tbody id="tabledata" class="ligth-body">
-                            @foreach ($collectiontransactions as $idx=>$collectiontransaction)
-                                <tr style="cursor: pointer" onclick="window.location.href='{{ route('collectiontransactions.show',$collectiontransaction->uuid) }}'" >
-                                    <td>{{$idx + $collectiontransactions->firstItem()}}</td>
-                                    <td>{{ $collectiontransaction->document_no }}</td>
-                                    <td>{{ $collectiontransaction->branch->branch_name_eng }}</td>
-                                    <td>{{ $collectiontransaction->installer_card_card_number  }}</td>
-                                    <td>{{ $collectiontransaction->invoice_number  }}</td>
-                                    <td>{{ $collectiontransaction->total_points_collected  }}</td>
-                                    <td>{{ number_format($collectiontransaction->total_save_value,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                                    <td>{{ Carbon\Carbon::parse($collectiontransaction->collection_date)->format('M d Y') }}</td>
+                            @foreach ($redemptiontransactions as $idx=>$redemptiontransaction)
+                                <tr style="cursor: pointer" onclick="window.location.href='{{ route('redemptiontransactions.show',$redemptiontransaction->uuid) }}'" >
+                                    <td>{{ ++$idx }}</td>
+                                    <td>{{ $redemptiontransaction->document_no }}</td>
+                                    <td>{{ $redemptiontransaction->branch->branch_name_eng }}</td>
+                                    <td>{{ $redemptiontransaction->installer_card_card_number  }}</td>
+                                    <td>{{ $redemptiontransaction->total_points_redeemed  }}</td>
+                                    <td>{{ number_format($redemptiontransaction->total_cash_value,0,'.',',') }} <span class="ms-4">MMK</span></td>
                                     <td>
-                                        @if($collectiontransaction->isDeleteAuthUser() && $collectiontransaction->allowDelete())
-                                            <form action="{{ route('collectiontransactions.destroy',$collectiontransaction->uuid) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a class="text-danger delete-btns"><i class="fas fa-trash"></i></a>
-                                            </form>
-                                        @endif
+                                        {!! $redemptiontransaction->status == "pending" ? "<span class='badge bg-warning'>$redemptiontransaction->status</span>" : ($redemptiontransaction->status == "approved" ? "<span class='badge bg-success'>$redemptiontransaction->status</span>" :($redemptiontransaction->status == "rejected"? "<span class='badge bg-danger'>$redemptiontransaction->status</span>" : ($redemptiontransaction->status == "paid"? "<span class='badge bg-primary'>$redemptiontransaction->status</span>" : ($redemptiontransaction->status == "finished"? "<span class='badge bg-secondary'>$redemptiontransaction->status</span>" : '')))) !!}
                                     </td>
+                                    <td>{{ $redemptiontransaction->requester  }}</td>
+                                    <td>{{ $redemptiontransaction->prepareby->name  }}</td>
+                                    {{-- <td>{{ $redemptiontransaction->approvedby ? $redemptiontransaction->approvedby->name : 'N/A' }}</td> --}}
+                                    {{-- <td>{{  \Carbon\Carbon::parse($redemptiontransaction->redemption_date)->format('d-m-Y') }}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-center">
-                        {{ $collectiontransactions->appends(request()->all())->links('pagination::bootstrap-4') }}
+                        {{ $redemptiontransactions->appends(request()->all())->links('pagination::bootstrap-4') }}
                     </div>
                     <div class="myloader">
                         <div class="loader-item"></div>
@@ -123,25 +126,25 @@
 <script>
     $(document).ready(function() {
         $('.delete-btns').click(function(e){
-            e.stopPropagation();
-            {{-- console.log('hay'); --}}
+            {{-- console.log('hi'); --}}
+            e.preventDefault();
 
             Swal.fire({
-                title: "Are you sure you want to delete collection transaction?",
-                text: "All the collected will be removed recursively.",
+                title: "Are you sure you want to remove point promotion?",
+                text: "Your point promotion will be permanently deleted.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, send it!"
-                }).then((result) => {
+                confirmButtonText: "Yes, delete it!"
+              }).then((result) => {
                 if (result.isConfirmed) {
-
+                    {{-- console.log($(this).closest('form')); --}}
                     $(this).closest('form').submit();
                 }
-            });
-        });
+              });
 
+        });
     });
     function changeHandler(input){
         if(input.value){

@@ -85,18 +85,18 @@ class InstallerCardsController extends Controller
                                     ->orderBy("created_at",'desc')
                                     ->orderBy('id','desc')
                                     ->paginate(10, ['*'], 'collection_page');
-        // $redemptiontransactions = RedemptionTransaction::where('installer_card_card_number',$cardnumber)
-        //                             ->when($redemptionSearch, function ($query, $redemptionSearch) {
-        //                                 $query->where('document_no', 'LIKE', "%$redemptionSearch%");
-        //                                     // ->orWhere('transaction_id', 'LIKE', "%$redemptionSearch%")
-        //                             })
-        //                             ->orderBy("created_at",'desc')
-        //                             ->orderBy('id','desc')
-        //                             ->paginate(10, ['*'], 'redemption_page');
+        $redemptiontransactions = RedemptionTransaction::where('installer_card_card_number',$cardnumber)
+                                    ->when($redemptionSearch, function ($query, $redemptionSearch) {
+                                        $query->where('document_no', 'LIKE', "%$redemptionSearch%");
+                                            // ->orWhere('transaction_id', 'LIKE', "%$redemptionSearch%")
+                                    })
+                                    ->orderBy("created_at",'desc')
+                                    ->orderBy('id','desc')
+                                    ->paginate(10, ['*'], 'redemption_page');
 
 
-        // $usedpoints = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_points_redeemed');
-        // $usedamount = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_cash_value');
+        $usedpoints = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_points_redeemed');
+        $usedamount = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_cash_value');
 
         $installercardpointquery = InstallerCardPoint::query()
                                     ->where('installer_card_card_number',$cardnumber)
@@ -114,9 +114,9 @@ class InstallerCardsController extends Controller
             "installercard",
             "installercardcount",
             'collectiontransactions',
-            // 'redemptiontransactions',
-            // 'usedpoints',
-            // 'usedamount',
+            'redemptiontransactions',
+            'usedpoints',
+            'usedamount',
             'expiredpoints',
             'expiredamounts',
             'expiringsoonpoints',

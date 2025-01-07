@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <div class="card shadow p-3">
                                     <h5>Used Point</h5>
                                     <h2>{{ $usedpoints ? $usedpoints : '0' }}</h2>
@@ -63,7 +63,7 @@
                                         <h5 class="align-self-end">MMK</h5>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="col-md-3">
                                 <div class="card shadow p-3">
@@ -236,7 +236,7 @@
                             </div>
                         </form>
 
-                        {{-- <ul class="list-group list-group-flush earningpointlists">
+                        <ul class="list-group list-group-flush earningpointlists">
                             @foreach ($redemptiontransactions as $redemptiontransaction)
                                 <li class="list-group-item"  onclick="window.location.href='{{ route('redemptiontransactions.show',$redemptiontransaction->uuid) }}'">
                                     <div class="row">
@@ -261,7 +261,7 @@
                             <div class="d-flex justify-content-center">
                                 {{ $redemptiontransactions->appends(['collection_page' => $collectiontransactions->currentPage(),'collection_search' => $collectionSearch, 'redemption_search' => $redemptionSearch])->links() }}
                             </div>
-                        </ul> --}}
+                        </ul>
                     </div>
                   </div>
 
