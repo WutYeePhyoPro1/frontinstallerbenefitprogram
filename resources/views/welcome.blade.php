@@ -3,43 +3,48 @@
 
 @section("content")
 
-        <div class="row">
-                <div class="card px-0 signincards">
-                    <div class="text-white p-5 signbannerimage-container"
-                        style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                            url({{ asset('images/banner/banner1.jpg') }});
-                            background-repeat: no-repeat;
-                            background-position:center;
-                            background-size: cover;">
-
-                        <div class="pro1logo h-auto">
-                            <img src="{{ asset('images/PRO-1-Global-Logo-white.png') }}" width="160px" style="object-fit: cover;" alt="pro1logo" />
-                        </div>
-
-                        <h1 class="w-100 mt-0">Installer Benefit Program</h1>
-
-                        <h6 class="" style="align-self: end;justif-self:center;">Check Balance</h6>
-                    </div>
-
-
-                    <div class="card-body text-center">
-                        <div class="d-flex justify-content-center">
-                            <div class="col-md-6">
-
-                                    <div class="input-container">
-                                        <label for="phone" class="text-center title">Phone Number<span class="cancel_status"></sapn> </label>
-                                        <input type="text" name="phone" id="phone"  class="phone" value="{{ old('phone') }}" placeholder="09xxxxxxxxx" />
-                                    </div>
-
-                                <p class="mt-1">You may receive SMS notification from us.</p>
-                                <button type="button" id="signin-btn" class="btn btn-primary btn-sm">Sign In</button>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
+<div class="card shadow">
+    <div class="sign-banner  text-center p-4">
+        <img src="images/PRO-1-Global-Logo-white.png" width="160px" alt="Pro1 Logo">
+        <h1 class="mt-3">Installer Benefit Program</h1>
+        <h6>Check Balance</h6>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="09xxxxxxxxx" value="">
         </div>
+        <p class="text-muted">You may receive SMS notifications from us.</p>
+        <div class="d-grid">
+            <button type="button" id="signin-btn" class="btn btn-primary">Sign In</button>
+        </div>
+
+        <!-- Loader -->
+        <div class="d-flex justify-content-center mt-3">
+            <div id="loader" class="spinner-border text-primary d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Social Login -->
+        <div class="text-center mt-4">
+            <small class="text-muted">Our Social Applications</small>
+            <div class="mt-2">
+                <a href="#" class="btn btn-outline-primary btn-sm mx-1" title="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-danger btn-sm mx-1" title="Login with Google"><i class="fab fa-google"></i></a>
+                <a href="#" class="btn btn-outline-info btn-sm mx-1" title="Login with Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-dark btn-sm mx-1" title="Login with Github"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+
+        <!-- Data Policy -->
+        <div class="text-center mt-4 text-muted">
+            <small>
+                By clicking Sign In, you agree to our <a href="#" class="text-primary fw-bold">Terms</a>, <a href="#" class="text-primary fw-bold">Data Policy</a>, and <a href="#" class="text-primary fw-bold">Cookie Policy</a>.
+            </small>
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -50,6 +55,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#signin-btn").click(function(){
+            console.log('hay');
             const phone = $("#phone").val();
 
 

@@ -1,34 +1,53 @@
 @extends("layouts.front.customerindex")
 
 
+
 @section("content")
 
-        <div class="row">
-                <div class="card px-0 signincards">
-                    <div class="card-body text-center">
-                        <form id="verify-otp-form" action="" method="POST">
-                            @csrf
-                            <div class="d-flex justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="otpicons">
-                                        <img src="{{ asset('images/otpsend.png') }}" alt="" width="80" height="80">
-                                    </div>
-                                    <label for="" class="text-center title">Verification</label>
-                                    <p class="mt-1">We will send to you a One Time Password on your phone number</p>
+<div class="card shadow">
+    <div class="card-body text-center">
+        <form id="verify-otp-form" action="" method="POST">
+            @csrf
+            <div class="mb-4">
+                <img src="images/otpsend.png" alt="OTP Icon" width="80" height="80">
+                <h5 class="mt-3">Verification</h5>
+                <p>We will send you a One Time Password on your phone number</p>
+            </div>
 
-                                    <div class="input-container row align-items-center">
-                                        <h5><a href="javascript:void(0);" id="get-otp-btn" class="flex-fill text-nowrap text-primary font-weight-bold generate-otp-btns">GET OTP</a></h5>
-                                        <input type="number" id="otp_number" name="otp_number" class="otp_number"  min="100000" max="999999"  maxlength="6" placeholder="Enter 6-digit OTP" oninput="enforceSixDigits(this)" />
-                                    </div>
-                                    <p id="otptimer-text" class="d-none">Expire in <span id="otptimer"></span>.</p>
-                                    <p id="resend-otp" class="d-none mt-1">Didn't receive verification OTP? <a href="#" class="flex-fill text-nowrap text-primary font-weight-bold generate-otp-btns">Resend Again</a></p>
-                                    <button type="submit" id="verify-otp-btn" class="btn btn-primary btn-sm mt-2">Verify</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-        </div>
+            <div class="mb-3">
+                <label for="otp_number" class="form-label">Enter OTP</label>
+                <input type="number" id="otp_number" name="otp_number" class="form-control otp_number" min="100000" max="999999" placeholder="Enter 6-digit OTP" oninput="enforceSixDigits(this)">
+            </div>
+
+            <div class="input-container row align-items-center">
+                <h5><a href="javascript:void(0);" id="get-otp-btn" class="flex-fill text-nowrap text-primary font-weight-bold generate-otp-btns">GET OTP</a></h5>
+            </div>
+            <p id="otptimer-text" class="d-none"><span id="otptimer"></span></p>
+            <p id="resend-otp" class="d-none mt-1">Didn't receive verification OTP? <a href="javascript:void(0);" class="text-primary fw-bold generate-otp-btns">Resend Again</a></p>
+
+            <div class="d-grid">
+                <button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify</button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('css')
+
+<style>
+    /* .sign-banner {
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+            url('images/banner/banner1.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    .sign-banner img {
+        object-fit: cover;
+    } */
+     .otp_number{
+        appearance: none;
+     }
+</style>
 @endsection
 
 
@@ -103,7 +122,7 @@
                 seconds = seconds < 10 ? "0"+seconds : seconds;
 
                 $("#otptimer-text").removeClass('d-none');
-                $("#otptimer").text(`${minutes}:${seconds}`);
+                $("#otptimer").text(`Expires in ${minutes}:${seconds}.`);
 
                 if(timer-- <= 0){
                     clearInterval(setinv);

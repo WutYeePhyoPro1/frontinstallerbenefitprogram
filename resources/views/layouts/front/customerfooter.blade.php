@@ -8,12 +8,12 @@
         <script src="{{asset('./assets/libs/jquery-3.6.0/jquery-3.6.0.min.js')}}" type="text/javascript"></script>
 
         <!-- toastr css1 js1 -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script> --}}
         <script>
-                toastr.options = {
+                {{-- toastr.options = {
                     "progressBar":true,
                     "closeButton":true
-                };
+                }; --}}
         </script>
 
             @if(Session::has("success"))

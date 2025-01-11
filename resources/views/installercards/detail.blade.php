@@ -241,7 +241,7 @@
                                 <li class="list-group-item"  onclick="window.location.href='{{ route('redemptiontransactions.show',$redemptiontransaction->uuid) }}'">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="px-2 pb-0 mb-0 d-flex justify-content-between {{ ($redemptiontransaction->nature == 'normal') ? 'bg-success' :  (($redemptiontransaction->nature == 'return deduct') ? 'bg-danger' : ($redemptiontransaction->nature == 'double profit deduct' ? 'bg-warning' : '' )) }}">
+                                            <p class="px-2 pb-0 mb-0 {{ ($redemptiontransaction->nature == 'normal') ? 'bg-success' :  (($redemptiontransaction->nature == 'return deduct') ? 'bg-danger' : ($redemptiontransaction->nature == 'double profit deduct' ? 'bg-warning' : '' )) }}">
                                                 <span>{{ $redemptiontransaction->document_no }}</span>
                                                 <span>({{ ucwords($redemptiontransaction->nature) }})</span>
                                             </p>
