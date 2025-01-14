@@ -124,6 +124,16 @@ class InstallerCardsController extends Controller
             'redemptionSearch'
         ));
     }
+    public function track($card_number,Request $request){
+        $installercard = InstallerCard::where('card_number',$card_number)->first();
+
+        $allinstallercards = InstallerCard::where('gbh_customer_id',$installercard->gbh_customer_id)->orderBy('created_at','desc')->get();
+        // dd($allinstallercards);
+
+
+        return view("installercards.track",compact("allinstallercards"))->render();
+    }
+
 
     public function signout(Request $request){
         Session::flush();

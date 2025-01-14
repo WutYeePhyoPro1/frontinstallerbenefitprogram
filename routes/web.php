@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth.card',"auth.otp","auth.autologout"]], funct
     Route::get('lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    Route::get('/installercards/{cardnumber}/track',[InstallerCardsController::class,"track"])->name("installercards.track");
+
     Route::get("/installercards/detail",[InstallerCardsController::class,'detail'])->name("installercards.detail");
 
     Route::get("/collectiontransactions/{collectiontransaction}",[CollectionTransactionsController::class,'show'])->name('collectiontransactions.show');
