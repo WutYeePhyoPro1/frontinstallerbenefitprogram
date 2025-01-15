@@ -35,6 +35,8 @@ class CreateInstallerCardPointsTable extends Migration
             $table->decimal("amount_earned",19,2);
             $table->decimal("amount_redeemed",19,2);
             $table->decimal("amount_balance",19,2);
+            $table->integer('preused_points')->default(0);
+            $table->decimal("preused_amount",19,2)->default(0);
             $table->dateTime("expiry_date");
             $table->enum('is_redeemed', ['0', '1'])->default('0');
             $table->enum('is_returned', ['0', '1'])->default('0');

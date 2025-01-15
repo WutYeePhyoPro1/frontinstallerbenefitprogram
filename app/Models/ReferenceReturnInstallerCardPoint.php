@@ -29,6 +29,8 @@ class ReferenceReturnInstallerCardPoint extends Model
         'amount_earned',
         'amount_redeemed',
         'amount_balance',
+        'preused_points',
+        "preused_amount",
         'expiry_date',
         'is_redeemed',
         'is_returned',

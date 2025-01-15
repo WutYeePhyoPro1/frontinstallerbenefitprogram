@@ -168,17 +168,25 @@ class CollectionTransaction extends Model
         return $this->returnbanners()->where('return_product_docno',$return_product_docno)->exists();
     }
 
+    // public function checkfullyredeemed(){
+    //     $installercardpoints = InstallerCardPoint::where("collection_transaction_uuid",$this->uuid)
+    //                             ->where('is_redeemed',0)
+    //                             ->orderBy("created_at", "asc")
+    //                             ->orderBy('id','asc')
+    //                             ->exists();
+    //     if(count($installercardpoints) > 0){
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // }
+
     public function checkfullyredeemed(){
-        $installercardpoints = InstallerCardPoint::where("collection_transaction_uuid",$this->uuid)
+        return !(InstallerCardPoint::where("collection_transaction_uuid",$this->uuid)
                                 ->where('is_redeemed',0)
                                 ->orderBy("created_at", "asc")
                                 ->orderBy('id','asc')
-                                ->get();
-        if(count($installercardpoints) > 0){
-            return false;
-        }else{
-            return true;
-        }
+                                ->exists());
     }
 
     public function getExpireDate(){
