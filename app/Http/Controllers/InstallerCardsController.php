@@ -110,6 +110,13 @@ class InstallerCardsController extends Controller
                                 ->where("expiry_date", "<=", Carbon::now()->endOfMonth())
                                 ->sum('points_balance');
         // dd($expiringsoonpoints);
+
+        $collectedpoints = CollectionTransaction::where('installer_card_card_number',$cardnumber)->sum('total_points_collected');
+        $preusedpoints = abs(InstallerCardPoint::where("installer_card_card_number", $installercard->card_number)
+                            ->where('preused_points',"!=",0)
+                            ->sum('preused_points'));
+        $earnedpoints = $collectedpoints+$preusedpoints;
+
         return view('installercards.detail',compact(
             "installercard",
             "installercardcount",
@@ -121,7 +128,8 @@ class InstallerCardsController extends Controller
             'expiredamounts',
             'expiringsoonpoints',
             'collectionSearch',
-            'redemptionSearch'
+            'redemptionSearch',
+            "earnedpoints"
         ));
     }
     public function track($card_number,Request $request){

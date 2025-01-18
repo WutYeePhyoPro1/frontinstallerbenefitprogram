@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                 <i class="ri-menu-line wrapper-menu"></i>
-                <a href="{{ route('home') }}" class="header-logo">
+                <a href="{{ route('installercards.detail') }}" class="header-logo">
                     <img src="{{ asset('images/logo.png') }}" class="img-fluid rounded-normal" alt="logo">
                     <h5 class="logo-title ml-3 pt-2">Installer Benefit Program</h5>
 
@@ -18,7 +18,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-list align-items-center">
 
-                        {{-- <li class="nav-item nav-icon mx-2">{{Auth::user()->name}} @ {{ Auth::user()->branch->branch_name_eng }}</li> --}}
+                        <li class="nav-item nav-icon mx-2">{{getAuthCard()->fullname}} @ {{ getAuthCard()->phone }}</li>
 
                         <a onclick="openCloseFullscreen();"><i class="ri-fullscreen-line"></i></a>
                         <li class="nav-item nav-icon dropdown">

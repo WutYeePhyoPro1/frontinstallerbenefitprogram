@@ -163,20 +163,20 @@ body{
 /* Start  Installer Card Point Detail*/
     .collectpointcard{
         background: rgba(247, 230, 212, 1);
-        min-height: 60vh;
+        /* min-height: 60vh; */
     }
 
-    .earningpointlists{
-        height: 555px;
+    .transactionlists{
+        max-height: 555px;
         overflow-y: auto;
     }
 
-    .earningpointlists li:hover{
+    .transactionlists li:hover{
         cursor: pointer;
         background-color: #eee;
     }
 
-    .earningpointlists li.fullyredeemed
+    .transactionlists li.fullyredeemed
     {
         background-color: rgba(230, 224, 234, 1);
     }
@@ -184,12 +184,14 @@ body{
 
     .redeemcashcards{
         background: rgba(226, 238, 218, 1);
-        min-height: 60vh;
+        /* min-height: 60vh; */
     }
 
-    .returnproductscards{
-        background: rgba(230, 224, 234, 1);
-    }
+    /* @media (min-width: 768px) {
+        .transactionlists{
+            height: 555px;
+        }
+    } */
 /* End Installer Card Point Detail */
 
 
@@ -368,3 +370,8 @@ body{
     transform: rotate(-90deg);
   }
 /* End FAQ */
+
+.selectalls,.singlechecks{
+    margin: 0 !important;
+    position: relative;
+}

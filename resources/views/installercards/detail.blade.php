@@ -31,10 +31,10 @@
                         <div class="row">
 
                             <div class="col-md-3">
-                                <div class="card shadow p-3">
-                                    <h5>Balance Point</h5>
+                                <div class="card shadow p-3" data-toggle="modal" data-target="#balancemodel" style="cursor: pointer">
+                                    <h5 class="text-underline" style="text-underline-offset: 5px;">Balance Point</h5>
                                     <div class="flex">
-                                        <h2>{{ intval($installercard->totalpoints) }} </h2>
+                                        <h2>{{ intval($installercard->totalpoints) }}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                             </div>
                         </form>
 
-                        <ul class="list-group list-group-flush earningpointlists">
+                        <ul class="list-group list-group-flush transactionlists">
 
                             @foreach ($collectiontransactions as $collectiontransaction)
                                 <li class="list-group-item {{ $collectiontransaction->checkfullyredeemed() ? 'fullyredeemed' : '' }}"  onclick="window.location.href='{{ route('collectiontransactions.show',$collectiontransaction->uuid) }}'">
@@ -236,7 +236,7 @@
                             </div>
                         </form>
 
-                        <ul class="list-group list-group-flush earningpointlists">
+                        <ul class="list-group list-group-flush transactionlists">
                             @foreach ($redemptiontransactions as $redemptiontransaction)
                                 <li class="list-group-item"  onclick="window.location.href='{{ route('redemptiontransactions.show',$redemptiontransaction->uuid) }}'">
                                     <div class="row">
@@ -304,6 +304,62 @@
 </div>
 
 
+
+ <!-- START MODAL AREA -->
+    <!-- start create modal -->
+
+    <div id="balancemodel" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h6 class="modal-title">Balance Modal</h6>
+                    <button type="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form id="balanceform" action="" method="POST">
+                        @csrf
+
+                        <div class="row align-items-center px-4">
+                                <div class="col-md-12">
+                                    <h4 class="text-center" >Balance Summary</h4>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group d-flex justify-content-between">
+                                        <div>
+                                            <label for="name" class="d-block mb-0">Total Earned Points<span class="text-danger">*</span></label>
+                                            <input type="hidden" id="total_earned_points" name="total_earned_points" class="form-control form-control-sm rounded-0" readonly value="1000">
+                                            <span class="text-danger">(including before return points)</span>
+                                        </div>
+
+                                        <span>{{ $earnedpoints ? $earnedpoints : '0' }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group d-flex justify-content-between">
+                                        <label for="name">Total Used Points<span class="text-danger">*</span></label>
+                                        <input type="hidden" id="total_redeemed_points" name="total_redeemed_points" class="form-control form-control-sm rounded-0" readonly value="1000">
+                                        <span>{{ $usedpoints ? $usedpoints : '0' }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-center" style="border-top: 1px dashed #ddd;">
+                                    <div class="form-group d-flex justify-content-between">
+                                        <label for="name" class="text-center w-full d-block">Balance Points<span class="text-danger">*</span></label>
+                                        <input type="hidden" name="balance_points" id="balance_points" class="form-control form-control-sm rounded-0" value="0" readonly/>
+                                        <span>{{ intval($installercard->totalpoints) }}</span>
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end create modal -->
+ <!-- END MODAL AREA -->
 @endsection
 
 

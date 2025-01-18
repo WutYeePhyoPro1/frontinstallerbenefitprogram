@@ -2,8 +2,8 @@
     <nav class="iq-sidebar-menu">
         <ul id="iq-sidebar-toggle" class="iq-menu">
 
-            <li class="{{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'active' : ''}}">
-                <a href="{{ route('home') }}" class="svg-icon">
+            <li class="{{ (strpos(Route::currentRouteName(), 'installercards.detail') === 0) ? 'active' : ''}}">
+                <a href="{{ route('installercards.detail') }}" class="svg-icon">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20"  viewBox="0 0 60.000000 60.000000"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 
