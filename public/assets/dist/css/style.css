@@ -81,3 +81,8 @@ input:focus {
     background-color: red;
 }
 /* End OTP */
+
+/* Customer Welcome */
+input, select, textarea {
+    font-size: 16px; /* Prevent zooming on mobile devices */
+}
