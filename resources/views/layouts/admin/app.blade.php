@@ -31,7 +31,7 @@
     <!-- Wrapper Start -->
     <div class="wrapper">
 
-        <div class="iq-sidebar  sidebar-default ">
+        <div class="iq-sidebar  sidebar-default sidebars">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                 <a href="{{ route('installercards.detail') }}" class="header-logo">
                     <img src="{{ asset('images/logo.png') }}" class="img-fluid rounded-normal light-logo" alt="logo"><h4 class="logo-title light-logo ml-3 pt-2">Installer Benefit Program</Label></h4>

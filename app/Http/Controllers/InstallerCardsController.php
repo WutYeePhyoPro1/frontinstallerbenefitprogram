@@ -69,7 +69,7 @@ class InstallerCardsController extends Controller
         $cardnumber = getAuthCard()->card_number;
         $installercard = InstallerCard::where('card_number',$cardnumber)->first();
         // dd($installercard);
-        $installercardcount = InstallerCard::where('gbh_customer_id',$installercard->gbh_customer_id)->where('card_number',"!=",$cardnumber)->count();
+        $installercardcount = InstallerCard::where('customer_barcode',$installercard->customer_barcode)->where('card_number',"!=",$cardnumber)->count();
         // dd($installercardcount);
 
 
@@ -135,7 +135,7 @@ class InstallerCardsController extends Controller
     public function track($card_number,Request $request){
         $installercard = InstallerCard::where('card_number',$card_number)->first();
 
-        $allinstallercards = InstallerCard::where('gbh_customer_id',$installercard->gbh_customer_id)->orderBy('created_at','desc')->get();
+        $allinstallercards = InstallerCard::where('customer_barcode',$installercard->customer_barcode)->orderBy('created_at','desc')->get();
         // dd($allinstallercards);
 
 
