@@ -19,6 +19,7 @@
       <link rel="stylesheet" href="{{ asset('vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
       <link rel="stylesheet" href="{{ asset('vendor/remixicon/fonts/remixicon.css') }}">
 
+      @yield("css")
       {{-- @include('sweetalert::alert') --}}
     </head>
   <body class="  ">

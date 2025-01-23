@@ -2,7 +2,7 @@
     <nav class="iq-sidebar-menu">
         <ul id="iq-sidebar-toggle" class="iq-menu">
 
-            <li class="border p-4">
+            {{-- <li class="border p-4">
                 <div class="text-center">
                     <img src="{{ asset('images/user/' . 'Admin' .'.png') }}" alt="profile-img" class="rounded profile-img img-fluid avatar-70 text-center">
                     <p>{{getAuthCard()->fullname}}</p>
@@ -10,7 +10,7 @@
                 <div>
                     Phone: {{getAuthCard()->phone}}
                 </div>
-            </li>
+            </li> --}}
 
             <li class="{{ (strpos(Route::currentRouteName(), 'installercards.detail') === 0) ? 'active' : ''}}">
                 <a href="{{ route('installercards.detail') }}" class="svg-icon">

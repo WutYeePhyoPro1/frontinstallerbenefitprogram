@@ -4,172 +4,133 @@
 <div class="content-page">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 pointpromotioninfos mb-2">
-                <h2 class="text-secondary">{{ $collectiontransaction->pointpromotion->name }}</h2>
-            </div>
-            <div class="col-lg-12 logo-container">
-                    <div class="pro1logo">
-                        <img src="{{ asset('images/PRO-1-Global-Logo.png') }}" width="160px" style="object-fit: cover;" alt="pro1logo" />
-                    </div>
 
-                    <div>
-                        <h4 class="mb-3 text-center text-secondary"><span>Collection Transaction</span> <span>( {{ $collectiontransaction->document_no }} )</h4>
-                        <h5 class="text-center">Installer Card - {{ $collectiontransaction->installer_card_card_number }}</h5>
+            <div class="col-lg-8 mx-auto">
+                {{-- <div class="card"> --}}
+                    <div class="card-header">
+                        <h4 class="mb-3 text-left"><span>Collection Transaction Detail</span></h4>
                     </div>
-                    <div class="d-flex justify-content-between font-weight-bold">
-                        <div class="d-flex flex-column">
-                            <span>Branch - {{ $collectiontransaction->branch->branch_name_eng }}</span>
-                            <span>Installer Name - {{ $collectiontransaction->installercard->fullname }}</span>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="{{ asset('assets/img/file.png') }}" width="100px" alt="file">
+                            {{-- <h2>{{ $collectiontransaction->total_points_collected }}</h2> --}}
+                            <h2 class="my-2">+ {{ number_format($collectiontransaction->total_save_value,0,'.',',') }} <span class="ms-4">MMK</span></h2>
                         </div>
-                        <span>Collection Date: {{ $collectiontransaction->collection_date }}</span>
+                        <hr/>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Transaction No.</span>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span>{{ $collectiontransaction->document_no }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Transaction Time</span>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span>{{  \Carbon\Carbon::parse($collectiontransaction->collection_date)->format('d/m/Y h:m:s A') }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Total Points Collected</span>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span>{{ $collectiontransaction->total_points_collected }}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Total Save Amount</span>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span>{{ number_format($collectiontransaction->total_save_value,0,'.',',') }} <span class="ms-4">MMK</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="tables">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth ligth-data">
+                                            <th>No</th>
+                                            <th>Category/ Group</th>
+                                            <th>Sale Amount</th>
+                                            <th style="text-align:right !important;">Point Earned/ Amount Earned</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach ($installercardpoints as $idx=>$installercardpoint)
+                                        <tr>
+                                            <td>{{ ++$idx }}</td>
+                                            <td>
+                                                {{ $installercardpoint->category_remark  }} / {{ $installercardpoint->group_name  }}
+                                            </td>
+                                            <td>
+                                                {{ number_format($installercardpoint->saleamount,0,'.',',') }} <span class="ms-4">MMK</span>
+                                            </td>
+                                            <td class="text-right">
+                                                <span class="d-block">{{ $installercardpoint->points_earned  }}</span>
+                                                <span class="d-block">{{ number_format($installercardpoint->amount_earned,0,'.',',') }} <span class="ms-4">MMK</span></span>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                         @if(count($returnbanners) > 0)
+
+                        <div class="my-2" style="border-top: 2px dashed silver"></div>
+
+                        <div class="row">
+                            <div class="col-lg-12"  >
+                                <h5>Return Product Record</h5>
+                                <table class="tables">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth ligth-data">
+                                            <th>No</th>
+                                            <th>Document No.</th>
+                                            <th>Total Return Value</th>
+                                            <th style="text-align:right !important;">Total Return Point</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach ($returnbanners as $idx=>$returnbanner)
+                                        <tr>
+                                            <td>{{ ++$idx }}</td>
+                                            <td>
+                                                <a href="{{ route('returnbanners.show',$returnbanner->uuid) }}"  class="text-underline" style="text-underline-offset: 5px;">{{ $returnbanner->return_product_docno  }}</a>
+                                            </td>
+                                            <td>
+                                                {{  number_format($returnbanner->total_return_value,0,'.',',') }} <span class="ms-4">MMK</span>
+                                            </td>
+                                            <td class="text-right">
+                                                {{ $returnbanner->total_return_points }}
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @endif
+
+
                     </div>
-                    <h6 class="font-weight-bold text-mute mt-2">{{ $collectiontransaction->invoice_number }}</h6>
-                    <small class="text-danger d-block">Expire at: {{ $collectiontransaction->getExpireDate() }}</small>
+                {{-- </div> --}}
             </div>
 
-            @if ($message = Session::get('error'))
-            <div class="alert alert-danger">
-                <p>{{ $message }}</p>
-            </div>
-            @endif
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-            @endif
-
-            <div class="col-lg-12">
-                <div class="table-responsive rounded">
-                    <table class="table mb-0 tbl-server-info" id="lucky_draw_list">
-                        <thead class="bg-white text-uppercase">
-                            <tr class="ligth ligth-data">
-                                <th>No</th>
-                                <th>Return</th>
-                                <th>Category</th>
-                                <th>Group</th>
-                                <th>Sale Amount</th>
-                                <th>Point Earned</th>
-                                <th>Point Redeemed</th>
-                                <th>Point Balance</th>
-                                <th>Amount Rate</th>
-                                <th>Amount Earned</th>
-                                <th>Amount Redeemed</th>
-                                <th>Amount Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ligth-body">
-                            @foreach ($installercardpoints as $idx=>$installercardpoint)
-                            <tr class="installercardpoint {{ $installercardpoint->is_redeemed == 1 ? 'redeemed' : '' }}">
-                                <td>{{ ++$idx }}</td>
-                                {{-- <td class="">
-                                    <div class="form-check d-flex justify-center align-items-center">
-                                        <input  type="checkbox" value="" id="return" class="form-check-input returns" {{ $installercardpoint->is_returned == 1 ? 'checked' : '' }} disabled />
-                                    </div>
-                                </td> --}}
-                                <td>
-                                    {!!   $installercardpoint->is_returned == 1 ? "<i class='fas fa-check-square fa-lg text-primary'></i>" : "<i class='far fa-square fa-lg text-light'></i>"  !!}
-                                </td>
-                                <td>{{ $installercardpoint->category_remark  }}</td>
-                                <td>{{ $installercardpoint->group_name  }}</td>
-                                <td>{{ number_format($installercardpoint->saleamount,0,'.',',') }}</td>
-                                <td>{{ $installercardpoint->points_earned  }}</td>
-                                <td>{{ $installercardpoint->points_redeemed }}</td>
-                                <td>{{ $installercardpoint->points_balance }}</td>
-                                <td>{{ $installercardpoint->points_earned  }} x {{ intval($installercardpoint->point_based)  }}</td>
-                                <td>{{ number_format($installercardpoint->amount_earned,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                                <td>{{ number_format($installercardpoint->amount_redeemed,0,'.',',') }}  <span class="ms-4">MMK</span></td>
-                                <td>{{ intval($installercardpoint->amount_balance) }}</td>
-                            </tr>
-                            @endforeach
-                            <tr class="">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b class="text-info">{{ number_format($collectiontransaction->total_sale_cash_amount,0,'.',',') }}</b></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="font-weight-bold">Total Points Collected</td>
-                                <td>{{ $collectiontransaction->total_points_collected }}</td>
-                                <td class="font-weight-bold">Total Available Points</td>
-                                <td>{{ $total_available_points }}</td>
-                                <td class="font-weight-bold">Total Save Amount</td>
-                                <td>{{ number_format($collectiontransaction->total_save_value,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                                <td class="font-weight-bold">Total Available Amount</td>
-                                <td>{{ number_format($total_available_amount,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                            </tr>
-
-                            {{-- <tr class="coupon-receive-footer2">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Total Points Redeemed</td>
-                                <td>{{ $collectiontransaction->total_points_redeemed }}</td>
-                            </tr> --}}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="col-lg-12">
-                    @if(strpos($previousRouteName, 'collectiontransactions.show') === 0)
-                        <a href="{{route('installercardpoints.detail',$collectiontransaction->installer_card_card_number)}}" id="back-btn" class="btn btn-light mr-2">Back</a>
-                    @else
-                        <button type="button" id="back-btn" class="btn btn-light mr-2" onclick="window.history.back();">Back</button>
-                    @endif
-            </div>
-
-
-            @if(count($returnbanners) > 0)
-            <div class="col-lg-12 mb-4 pb-4">
-                <div class="table-responsive rounded">
-                    <h5>Return Product Record</h5>
-                    <table class="table table-danger mb-0 tbl-server-info" id="lucky_draw_list">
-                        <thead class="bg-white text-uppercase">
-                            <tr class="ligth ligth-data">
-                                <th>No</th>
-                                <th>Branch</th>
-                                <th>Document No.</th>
-                                <th>Refference Invoice Number</th>
-                                <th>Total Sale Amount</th>
-                                <th>Total Return Value</th>
-                                <th>Before Return Total Point</th>
-                                <th>Total Return Point</th>
-                                <th>After Return Total Point</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ligth-body">
-                            @foreach ($returnbanners as $idx=>$returnbanner)
-                            <tr>
-                                <td>{{ ++$idx }}</td>
-                                <td>{{ $returnbanner->branch->branch_name_eng  }}</td>
-                                <td><a href="{{ route('returnbanners.show',$returnbanner->uuid) }}"  class="text-underline" style="text-underline-offset: 5px;">{{ $returnbanner->return_product_docno  }}</a></td>
-                                <td>{{ $returnbanner->ref_invoice_number  }}</td>
-                                <td>{{  number_format($returnbanner->referencereturncollectiontransaction->total_sale_cash_amount,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                                <td>{{  number_format($returnbanner->total_return_value,0,'.',',') }} <span class="ms-4">MMK</span></td>
-                                <td>{{ $returnbanner->referencereturncollectiontransaction->total_points_collected }}</td>
-                                <td>{{ $returnbanner->total_return_points }}</td>
-                                <td>{{ $returnbanner->referencereturncollectiontransaction->total_points_collected +  $returnbanner->total_return_points }}</td>
-                                {{-- <td>{{ $returnbanner->collectiontransaction->total_points_collected }}</td> --}}
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @endif
 
         </div>
         <!-- Page end  -->
@@ -177,6 +138,13 @@
     <!-- Modal Edit -->
 </div>
 @endsection
+
+@section('css')
+<style type="text/css">
+
+</style>
+@endsection
+
 @section('js')
 <script>
     $(document).ready(function() {
