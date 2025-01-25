@@ -15,6 +15,8 @@
                         <img src="{{ asset('assets/img/file.png') }}" width="100px" alt="file">
                         {{-- <h2>{{ $collectiontransaction->total_points_collected }}</h2> --}}
                         <h2 class="my-2">- {{ number_format($redemptiontransaction->total_cash_value,0,'.',',') }} <span class="ms-4">MMK</span></h2>
+                        <span class="badge {{ ($redemptiontransaction->nature == 'normal') ? 'bg-success' :  (($redemptiontransaction->nature == 'return deduct') ? 'bg-danger' : ($redemptiontransaction->nature == 'double profit deduct' ? 'bg-warning' : '' )) }}">{{ ucwords($redemptiontransaction->nature) }}</span>
+
                     </div>
                     <hr/>
 
@@ -82,6 +84,9 @@
                             </table>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
 

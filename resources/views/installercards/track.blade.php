@@ -17,7 +17,8 @@
                     @foreach ($allinstallercards as $installercard)
                         <div class="col-md-4  mb-3 md-mb-0">
                             <div class="installercards {{ ($installercard->status != 1) ? "inactivecard" : '' }}">
-                                <h5 class="text-center">Installer Card
+                                <h5 class="text-center">
+                                    <i>Installer Card</i>
                                     @if($installercard->status == 1)
                                     <span class="float-right"><i class="fas fa-check-circle text-info"></i></span>
                                     @endif
@@ -26,7 +27,7 @@
                                 <p><strong>Installer Name:</strong> {{ $installercard->fullname }}</p>
                                 <p><strong>Phone Number:</strong> {{ $installercard->phone }}</p>
                                 <p><strong>NRC:</strong> {{ $installercard->nrc }}</p>
-                                <p><strong>Points Expiring Soon:</strong> 100 points by 2024-12-31</p>
+                                <p>Issued: {{  \Carbon\Carbon::parse($installercard->issued_at)->format('d/m/Y') }}</p>
                             </div>
                         </div>
                     @endforeach

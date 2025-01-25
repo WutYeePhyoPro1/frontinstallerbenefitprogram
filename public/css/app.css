@@ -65,7 +65,7 @@ body{
 /* End Installer Menu */
 
 /* Start Installer Card */
-    .installercards{
+    /* .installercards{
         background: #414EEB;
         color: white;
         border-radius: 20px;
@@ -76,6 +76,18 @@ body{
     .inactivecard{
         background: rgba(230, 224, 234, 1);
         color: inherit;
+    } */
+    .installercards{
+        background: linear-gradient(135deg, #6C63FF, #8E54E9);;
+        color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+
+    }
+    .inactivecard{
+        background:#6c757d; background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.23) 100%);
+        color: white;
     }
 
     .custom-switch {
@@ -386,6 +398,125 @@ body{
 
 
 
+
+
+
+
+
+
+
+
+
+.summary-card {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-card .icon {
+    font-size: 50px;
+}
+
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tab.active {
+    background: #4facfe;
+    color: white;
+}
+
+
+.transactions {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction p {
+    margin: 0;
+    font-size: 14px !important;
+}
+
+.transaction .amount {
+    font-weight: bold;
+}
+
+.menu{
+    width: 80px;
+    cursor: pointer;
+}
+
+.menu-icon{
+    width: 50px;
+    height: 50px;
+    background: #f4f4f4;
+    /* color: rgba(79, 172, 254,0.8); */
+    border-radius: 50%;
+    font-size: 20px;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    flex-wrap: wrap;
+    gap: 40px;
+
+}
+
+.badge-labels{
+    border: 1px solid #aaa
+}
+.detail-btns{
+    width: 25px;
+    height: 25px;
+    background: #ddd;
+    color: white;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* General table styles */
 .tables {
     width: 100%;
@@ -454,3 +585,23 @@ body{
     background-color: #e9ecef;
     cursor: pointer;
   }
+
+
+.card-banners{
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 50%, #4facfe 50%);
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+}
+.balance-highlight {
+    font-size: 2rem;
+    /* color: #0056b3; */
+    margin: 10px 0;
+}
+.mycards{
+    min-width: 300px;
+    background: linear-gradient(135deg, #6C63FF, #8E54E9);
+    color: white;
+}
+.olds{
+    background:#6c757d; background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.23) 100%);
+}

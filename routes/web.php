@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OtpsController;
+use App\Http\Controllers\HistoriesController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PreusedSlipsController;
 use App\Http\Controllers\ReturnBannersController;
@@ -43,5 +44,9 @@ Route::group(['middleware' => ['auth.card',"auth.otp","auth.autologout"]], funct
     Route::get("/returnbanners/{returnbanner}",[ReturnBannersController::class,'show'])->name('returnbanners.show');
 
     Route::get("/preusedslips/{preusedslip}",[PreusedSlipsController::class,'show'])->name('preusedslips.show');
+
+
+    Route::get("/histories",[HistoriesController::class,'index'])->name("histories.index");
+
 });
 

@@ -29,6 +29,15 @@
 
                         <div class="row">
                             <div class="col-6">
+                                <span>Invoice No.</span>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span>{{ $collectiontransaction->invoice_number }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
                                 <span>Transaction Time</span>
                             </div>
                             <div class="col-6 text-right">

@@ -18,7 +18,7 @@
       <link rel="stylesheet" href="{{ asset('vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
       <link rel="stylesheet" href="{{ asset('vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
       <link rel="stylesheet" href="{{ asset('vendor/remixicon/fonts/remixicon.css') }}">
-
+      <link rel="stylesheet" href="{{ asset('assets/libs/jquery-3.6.0/jquery-3.6.0.min.js') }}">
       @yield("css")
       {{-- @include('sweetalert::alert') --}}
     </head>
@@ -71,6 +71,8 @@
     <!-- app JavaScript -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jQuery.print.js') }}"></script>
+
+
     <script type="text/javascript">
       // $(document).ready(function() {
       //   function sendRequest(){

@@ -84,15 +84,17 @@ class InstallerCardsController extends Controller
                                     })
                                     ->orderBy("created_at",'desc')
                                     ->orderBy('id','desc')
-                                    ->paginate(10, ['*'], 'collection_page');
+                                    ->paginate(5, ['*'], 'collection_page');
         $redemptiontransactions = RedemptionTransaction::where('installer_card_card_number',$cardnumber)
                                     ->when($redemptionSearch, function ($query, $redemptionSearch) {
                                         $query->where('document_no', 'LIKE', "%$redemptionSearch%");
                                             // ->orWhere('transaction_id', 'LIKE', "%$redemptionSearch%")
                                     })
+                                    ->whereIn('status',["finished"])
+                                    ->whereNotIn('nature',["double profit deduct"])
                                     ->orderBy("created_at",'desc')
                                     ->orderBy('id','desc')
-                                    ->paginate(10, ['*'], 'redemption_page');
+                                    ->paginate(5, ['*'], 'redemption_page');
 
 
         $usedpoints = RedemptionTransaction::where('installer_card_card_number',$cardnumber)->whereIn('status',['paid','finished'])->sum('total_points_redeemed');
@@ -117,6 +119,15 @@ class InstallerCardsController extends Controller
                             ->sum('preused_points'));
         $earnedpoints = $collectedpoints+$preusedpoints;
 
+        $collectedamount = CollectionTransaction::where('installer_card_card_number',$cardnumber)->sum('total_save_value');
+        $preusedamount = abs(InstallerCardPoint::where("installer_card_card_number", $installercard->card_number)
+                            ->where('preused_amount',"!=",0)
+                            ->sum('preused_amount'));
+        $earnedamount = $collectedamount+$preusedamount;
+
+
+
+        $oldinstallercards = InstallerCard::where('customer_barcode',$installercard->customer_barcode)->where('card_number',"!=",$cardnumber)->paginate(4);
         return view('installercards.detail',compact(
             "installercard",
             "installercardcount",
@@ -129,7 +140,9 @@ class InstallerCardsController extends Controller
             'expiringsoonpoints',
             'collectionSearch',
             'redemptionSearch',
-            "earnedpoints"
+            "earnedpoints",
+            "earnedamount",
+            "oldinstallercards"
         ));
     }
     public function track($card_number,Request $request){
