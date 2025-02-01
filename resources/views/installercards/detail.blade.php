@@ -91,11 +91,11 @@
                         </div>
                         <div class="row">
                             <div class="col-6">Expired Point:</div>
-                            <div class="col-6 text-right"> <span>{{ $expiredpoints ? $expiredpoints : 0 }}</span></div>
+                            <div class="col-6 text-right"> <span>{{ intval($installercard->expire_points) }}</span></div>
                         </div>
                         <div class="row">
                             <div class="col-6">Expired Amount:</div>
-                            <div class="col-6 text-right"><span>{{ $expiredamounts ? number_format($expiredamounts,0,'.',',') : 0 }} MMK</span></div>
+                            <div class="col-6 text-right"><span>{{ number_format($installercard->expire_amount,0,'.',',') }} MMK</span></div>
                         </div>
                     </div>
                 </div>
