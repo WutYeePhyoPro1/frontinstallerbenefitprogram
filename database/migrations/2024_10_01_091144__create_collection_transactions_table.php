@@ -31,10 +31,10 @@ class CreateCollectionTransactionsTable extends Migration
             $table->decimal('total_save_value', 19, 2);
             $table->dateTime('collection_date');
             $table->uuid("user_uuid");
-            $table->date('buy_date');
-            $table->bigInteger('gbh_customer_id');
-            $table->bigInteger('sale_cash_document_id');
-            $table->string('branch_code',10);
+            $table->date('buy_date')->nullable();
+            $table->bigInteger('gbh_customer_id')->nullable();
+            $table->bigInteger('sale_cash_document_id')->nullable();
+            $table->string('branch_code',10)->nullable();
             // $table->foreign('user_uuid')->references('uuid')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
