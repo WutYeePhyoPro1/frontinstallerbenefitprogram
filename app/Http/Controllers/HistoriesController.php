@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\CollectionTransaction;
 use App\Models\RedemptionTransaction;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -32,6 +33,7 @@ class HistoriesController extends Controller
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween(DB::raw('DATE(collection_date)'), [$startDate, $endDate]);
             })
+            ->orderBy("created_at",'desc')
             ->get();
 
         // dd($startDate,$endDate,$collectionTransactions);
@@ -46,8 +48,11 @@ class HistoriesController extends Controller
             })
             ->whereIn('status',["finished"])
             ->whereNotIn('nature',["double profit deduct"])
+            ->orderBy("created_at",'desc')
             ->get();
 
+        // dd($collectionTransactions,$redemptionTransactions);
+        // Log::debug($collectionTransactions);
         // Merge and sort the transactions
         $mergedTransactions = $collectionTransactions->merge($redemptionTransactions)
             ->sortByDesc(function ($transaction) {
