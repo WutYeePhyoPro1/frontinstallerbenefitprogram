@@ -43,7 +43,8 @@ class HistoriesController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where('document_no', 'LIKE', "%$search%");
             })
-            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+
+         ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween(DB::raw('DATE(redemption_date)'), [$startDate, $endDate]);
             })
             ->whereIn('status',["finished"])
@@ -51,14 +52,23 @@ class HistoriesController extends Controller
             ->orderBy("created_at",'desc')
             ->get();
 
+            // dd(
+            //     $collectionTransactions->pluck('id'),
+            //     $redemptionTransactions->pluck('id')
+            // );
+
         // dd($collectionTransactions,$redemptionTransactions);
         // Log::debug($collectionTransactions);
         // Merge and sort the transactions
-        $mergedTransactions = $collectionTransactions->merge($redemptionTransactions)
-            ->sortByDesc(function ($transaction) {
-                return [$transaction->created_at, $transaction->id];
-            });
+        // Merge both transactions without overwriting
+            $mergedTransactions = $collectionTransactions->concat($redemptionTransactions);
 
+            // Sort transactions by date
+            $mergedTransactions = $mergedTransactions->sortByDesc(fn($t) => [
+                $t->created_at ?? '0000-00-00 00:00:00',
+                $t->collection_date ?? $t->redemption_date ?? '0000-00-00',
+                $t->document_no
+            ])->values(); // Ensure keys are reset
             // dd($mergedTransactions);
 
         // Paginate the results
